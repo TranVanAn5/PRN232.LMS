@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: "@Ntran596"
+
+    ports:
+      - "1433:1433"
+
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+    networks:
+      - lms-network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    ports:
+      - "5000:8080"
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=PRN232LMS;User Id=sa;Password=@Ntran596;Encrypt=False;TrustServerCertificate=True;"
+
+    depends_on:
+      - sqlserver
+
+    networks:
+      - lms-network
+
+volumes:
+  sqlserver_data:
+
+networks:
+  lms-network:
+    driver: bridge

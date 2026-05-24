@@ -1,0 +1,68 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache/options
+.vs/
+.vscode/
+*.user
+*.userprefs
+*.sln.docstates
+*.suo
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Entity Framework
+*.edmx.diagram
+
+# NuGet
+.nuget/
+packages/
+!packages/build/
+*.nupkg
+*.snupkg
+*.symbols.nupkg
+
+# Environment files
+.env
+.env.local
+appsettings.*.json
+!appsettings.json
+!appsettings.Development.json
+
+# macOS
+.DS_Store
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Rider
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Database files
+*.mdf
+*.ldf
+*.ndf
+
+# Rider
+.idea/
