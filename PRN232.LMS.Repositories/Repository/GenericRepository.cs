@@ -134,20 +134,23 @@ namespace PRN232.LMS.Repositories.Repository
             if (string.IsNullOrWhiteSpace(expand))
                 return query;
 
-            var expandProperties = expand.Split(',', StringSplitOptions.RemoveEmptyEntries)
+            var expandProperties = expand.Split(',')
                 .Select(x => x.Trim())
-                .Where(x => !string.IsNullOrWhiteSpace(x))
-                .ToList();
+                .Where(x => !string.IsNullOrWhiteSpace(x));
 
             foreach (var property in expandProperties)
             {
-                try
+                // tìm property không phân biệt hoa thường
+                var navigationProperty = typeof(T)
+                    .GetProperty(
+                        property,
+                        BindingFlags.IgnoreCase |
+                        BindingFlags.Public |
+                        BindingFlags.Instance);
+
+                if (navigationProperty != null)
                 {
-                    query = query.Include(property);
-                }
-                catch
-                {
-                    // If Include fails (property doesn't exist), skip it
+                    query = query.Include(navigationProperty.Name);
                 }
             }
 
