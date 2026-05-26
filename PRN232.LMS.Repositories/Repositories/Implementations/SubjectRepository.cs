@@ -1,0 +1,11 @@
+using PRN232.LMS.Repositories.Data;
+using PRN232.LMS.Repositories.Entities;
+using PRN232.LMS.Repositories.Repositories.Interfaces;
+
+namespace PRN232.LMS.Repositories.Repositories.Implementations
+{
+    public class SubjectRepository : GenericRepository<Subject>, ISubjectRepository
+    {
+        public SubjectRepository(LmsDbContext context) : base(context) { }
+    }
+}

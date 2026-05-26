@@ -6,6 +6,5 @@ namespace PRN232.LMS.Service.Models
         public string FullName { get; set; }
         public string Email { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public List<EnrollmentBusiness> Enrollments { get; set; } = new();
     }
 }

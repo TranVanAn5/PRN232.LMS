@@ -27,6 +27,7 @@ namespace PRN232.LMS.API.Controllers
             [FromQuery] int pageSize = 10,
             [FromQuery] string expand = null)
         {
+            expand = string.IsNullOrWhiteSpace(expand) ? "Student,Course" : expand;
             var (data, totalCount) = await _service.GetAllAsync(search, sort, page, pageSize, expand);
             var pagination = new PaginationMetadata
             {
@@ -45,6 +46,7 @@ namespace PRN232.LMS.API.Controllers
         [ProducesResponseType(typeof(ResponseWrapper<object>), 404)]
         public async Task<IActionResult> GetById(int id, [FromQuery] string expand = null)
         {
+            expand = string.IsNullOrWhiteSpace(expand) ? "Student,Course" : expand;
             var business = await _service.GetByIdAsync(id, expand);
             if (business == null)
                 return NotFound(ResponseWrapper<object>.NotFoundResponse($"Enrollment with id {id} not found"));

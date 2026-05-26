@@ -45,15 +45,7 @@ namespace PRN232.LMS.API.Controllers
                 StudentId = b.StudentId,
                 FullName = b.FullName,
                 Email = b.Email,
-                DateOfBirth = b.DateOfBirth,
-                Enrollments = b.Enrollments?.Select(e => new EnrollmentResponse
-                {
-                    EnrollmentId = e.EnrollmentId,
-                    StudentId = e.StudentId,
-                    CourseId = e.CourseId,
-                    EnrollDate = e.EnrollDate,
-                    Status = e.Status
-                }).ToList() ?? new()
+                DateOfBirth = b.DateOfBirth
             }).ToList();
 
             return Ok(ResponseWrapper<List<StudentResponse>>.SuccessResponse(response, "Students retrieved successfully", pagination));
@@ -76,15 +68,7 @@ namespace PRN232.LMS.API.Controllers
                 StudentId = business.StudentId,
                 FullName = business.FullName,
                 Email = business.Email,
-                DateOfBirth = business.DateOfBirth,
-                Enrollments = business.Enrollments?.Select(e => new EnrollmentResponse
-                {
-                    EnrollmentId = e.EnrollmentId,
-                    StudentId = e.StudentId,
-                    CourseId = e.CourseId,
-                    EnrollDate = e.EnrollDate,
-                    Status = e.Status
-                }).ToList() ?? new()
+                DateOfBirth = business.DateOfBirth
             };
 
             return Ok(ResponseWrapper<StudentResponse>.SuccessResponse(response, "Student retrieved successfully"));

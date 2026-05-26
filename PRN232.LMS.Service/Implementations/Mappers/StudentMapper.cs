@@ -11,8 +11,7 @@ namespace PRN232.LMS.Service.Implementations.Mappers
                 StudentId = entity.StudentId,
                 FullName = entity.FullName,
                 Email = entity.Email,
-                DateOfBirth = entity.DateOfBirth,
-                Enrollments = entity.Enrollments?.Select(EnrollmentMapper.MapToEnrollmentBusiness).ToList() ?? new()
+                DateOfBirth = entity.DateOfBirth
             };
 
         public static Student MapToStudent(StudentBusiness business) =>

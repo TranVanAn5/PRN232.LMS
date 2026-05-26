@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using PRN232.LMS.Repositories.Data;
 using System.Reflection;
-using PRN232.LMS.Repositories.Interfaces;
+using PRN232.LMS.Repositories.Repositories.Interfaces;
 
-namespace PRN232.LMS.Repositories.Repository
+namespace PRN232.LMS.Repositories.Repositories.Implementations
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
@@ -36,7 +36,7 @@ namespace PRN232.LMS.Repositories.Repository
             string fields = null,
             string expand = null)
         {
-            IQueryable<T> query = _dbSet.AsNoTracking();
+            IQueryable<T> query = _dbSet;
 
             // Apply expansion (Include related entities)
             query = ApplyExpand(query, expand);
@@ -76,7 +76,7 @@ namespace PRN232.LMS.Repositories.Repository
 
         public async Task<T> GetByIdAsync(int id, string expand = null)
         {
-            IQueryable<T> query = _dbSet.AsNoTracking();
+            IQueryable<T> query = _dbSet;
 
             // Apply expansion
             query = ApplyExpand(query, expand);
@@ -136,18 +136,13 @@ namespace PRN232.LMS.Repositories.Repository
 
             var expandProperties = expand.Split(',', StringSplitOptions.RemoveEmptyEntries)
                 .Select(x => x.Trim())
-                .Where(x => !string.IsNullOrWhiteSpace(x))
                 .ToList();
 
             foreach (var property in expandProperties)
             {
-                try
+                if (!string.IsNullOrWhiteSpace(property))
                 {
                     query = query.Include(property);
-                }
-                catch
-                {
-                    // If Include fails (property doesn't exist), skip it
                 }
             }
 
